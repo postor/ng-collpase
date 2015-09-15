@@ -53,20 +53,20 @@ angular.module('collpase', []).factory('CollpaseData', function(){
       newGroup:newGroup,
       list:list
     };
-}).directive('ngCollpase', function($compile,$parse)
+}).directive('ngCollpase', function($compile)
 { 
   
   return {
       restrict: 'A',
       controller: ['$scope','CollpaseData', function($scope,CollpaseData){
-        $scope.collpaseData = CollpaseData;
+        if(!$scope.collpaseData) $scope.collpaseData = CollpaseData;
       }],
       link: function(scope, el, attrs, controller) {
         var option = {};
         if(attrs.ngCollpaseOption){
-          option = $parse(attrs.ngCollpaseOption)(scope);
+          option = scope.$eval(attrs.ngCollpaseOption);
         }
-        scope.collpaseData.newGroup(attrs.ngCollpase,option);
+        scope.collpaseData.newGroup(scope.$eval(attrs.ngCollpase),option);
       },
       scope: false
   };
@@ -77,11 +77,12 @@ angular.module('collpase', []).factory('CollpaseData', function(){
       restrict: 'A',
       link: function(scope,tElement, tAttrs) {
         var key = tAttrs['ngCollpaseTarget'];
-        key = $parse(key)(scope);
+        key = scope.$eval(key);
         var prefixedKey = key;
         var parent = tAttrs['ngCollpaseParent'];
-        parent = $parse(parent)(scope);
+        parent = scope.$eval(parent);
         var prefixedParent = parent;
+        console.log([parent,key]);
         
         tElement.attr('ng-class',"{'collpase-target-open':collpaseData.list['"
         +prefixedParent+"'].items['"+prefixedKey
@@ -98,18 +99,19 @@ angular.module('collpase', []).factory('CollpaseData', function(){
         
       }
   };
-}).directive('ngCollpaseHref', function($compile,$parse)
+}).directive('ngCollpaseHref', function($compile)
 { 
   
   return {
       restrict: 'A',
       link: function(scope,tElement, tAttrs) {
         var key = tAttrs['ngCollpaseHref'];
-        key = $parse(key)(scope);
+        key = scope.$eval(key);
         var prefixedKey = key;
         var parent = tAttrs['ngCollpaseParent'];
-        parent = $parse(parent)(scope);
+        parent = scope.$eval(parent);
         var prefixedParent = parent;
+        console.log([parent,key]);
         
         tElement.attr('ng-class',"{'collpase-href-open':collpaseData.list['"
         +prefixedParent+"'].items['"+prefixedKey
@@ -123,4 +125,3 @@ angular.module('collpase', []).factory('CollpaseData', function(){
       }
   };
 });
-
