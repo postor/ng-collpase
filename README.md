@@ -15,6 +15,7 @@
 
 <per><code>
   &lt;a ng-collpase-target="your-collpase-tap" ng-collpase-parent="your-collpase-id"&gt;
+  
   &lt;p ng-collpase-href="your-collpase-tap" ng-collpase-parent="your-collpase-id"&gt;
 </code></per>
   
