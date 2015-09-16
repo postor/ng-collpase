@@ -1,6 +1,6 @@
 # ng-collpase 让展开收起更自如
 
-##  实例参考：http://plnkr.co/edit/aQHSk3P6RtX9RGlduV6u?p=preview  ##
+##  实例参考：http://plnkr.co/edit/QFp379dEFQhKGRxmJz7p?p=preview  ##
 
 1.定义module时依赖
 
